@@ -48,8 +48,38 @@ func Power(base, exponent int) (int, error) {
 	}
 }
 
+func MakeCounter(start int) func() int {
+	counter := start
+	return func() int {
+		counter += 1
+		return counter
+	}
+}
 
+func MakeMultiplier(factor int) func(int) int {
+	return func(x int) int {
+		return x * factor
+	}
+}
+
+func MakeAccumulator(initial int) (add func(int), subtract func(int), get func() int) {
+	accumulator := initial
+	add = func(x int) {
+		accumulator += x
+	}
+	subtract = func(x int) {
+		accumulator -= x
+	}
+	get = func() int {
+		return accumulator
+	}
+	return add, subtract, get
+}
 
 func main() {
-
+	add, sub, get := MakeAccumulator(100)
+	add(50)
+	fmt.Println(get())
+	sub(30)
+	fmt.Println(get())
 }
