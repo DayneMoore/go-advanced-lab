@@ -358,3 +358,20 @@ func TestCompose(t *testing.T) {
 	}
 }
 
+func TestSwapValues(t *testing.T) {
+	gotA, gotB := SwapValues(5, 10)
+	if gotA != 10 || gotB != 5 {
+		t.Errorf("SwapValues(5, 10) = (%d, %d), want (10, 5)", gotA, gotB)
+	}
+}
+
+func TestSwapPointers(t *testing.T) {
+	a, b := 5, 10
+	gotA, gotB := SwapPointers(&a, &b)
+	if gotA != 10 || gotB != 5 {
+		t.Errorf("SwapPointers returned (%d, %d), want (10, 5)", gotA, gotB)
+	}
+	if a != 10 || b != 5 {
+		t.Errorf("After SwapPointers, variables are (%d, %d), want (10, 5)", a, b)
+	}
+}

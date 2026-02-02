@@ -140,6 +140,45 @@ func ExploreProcess() {
 	fmt.Println("Note: Other processes cannot access these memory addresses due to process isolation")
 }
 
+//I dont think this will modify the original value, becuase the only gets a copy of the value and use it inside the function
+//not modifying the original value
+func DoubleValue(x int) int {
+	return x * 2
+}
+
+//yes this will modify the original value, because we are passing the memory address of the variable
+func DoublePointer(x *int) {
+	*x = *x * 2
+}
+
+//this function creates a variable on the stack and returns its value
+func CreateOnStack() int {
+	y := 42
+	return y
+}
+
+//create on the heap and return its address
+func CreateOnHeap() *int {
+	x := 515
+	return &x
+}
+
+//swap two values using a temporary variable
+func SwapValues(a, b int) (int, int) {
+	swap := a
+	a = b
+	b = swap
+	return a, b
+}
+
+//swap two values using pointers
+func SwapPointers(a, b *int) (int, int) {
+	swap := *a
+	*a = *b
+	*b = swap
+	return *a, *b
+}
+
 func main() {
 	ExploreProcess() 
 }
