@@ -1,6 +1,7 @@
 package main
 import(
 	"fmt"
+	"os"
 ) 
 
 
@@ -115,10 +116,30 @@ func Compose(f func(int) int, g func(int) int) func(int) int {
 }
 
 
+func ExploreProcess() {
+	// A process ID (PID) is a unique number the operating system gives
+	// to a running program so it can be managed and identified.
+	pid := os.Getpid()
+	ppid := os.Getppid()
+
+	fmt.Println("=== Process Information ===")
+	fmt.Println("Current Process ID:", pid)
+	fmt.Println("Parent Process ID:", ppid)
+
+	// Create a slice of integers
+	data := []int{1, 2, 3, 4, 5}
+
+	// The address of the slice variable itself (slice header)
+	fmt.Printf("Memory address of slice: %p\n", &data)
+
+	// The address of the first element in the slice
+	fmt.Printf("Memory address of first element: %p\n", &data[0])
+
+	// Process isolation means each process has its own memory space.
+	// Other processes cannot directly access this program's memory.
+	fmt.Println("Note: Other processes cannot access these memory addresses due to process isolation")
+}
+
 func main() {
-	add, sub, get := MakeAccumulator(100)
-	add(50)
-	fmt.Println(get())
-	sub(30)
-	fmt.Println(get())
+	ExploreProcess() 
 }
