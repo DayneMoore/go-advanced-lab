@@ -158,8 +158,8 @@ func CreateOnStack() int {
 }
 
 //create on the heap and return its address
-func CreateOnHeap() *int {
-	x := 515
+func CreateOnHeap() *int{
+	x := 15
 	return &x
 }
 
@@ -179,6 +179,14 @@ func SwapPointers(a, b *int) (int, int) {
 	return *a, *b
 }
 
+//expirement 
+func AnalyzeEscape() {
+	CreateOnStack()
+	CreateOnHeap()
+}
+
 func main() {
-	ExploreProcess() 
+	//x escaped to the heap, that happened because it was pass by a pointer so the variable is saved on the heap
+	//rather than being deleted by the garbage collector
+	AnalyzeEscape() 
 }
